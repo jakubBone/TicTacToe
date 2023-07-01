@@ -1,10 +1,32 @@
+import java.util.Random;
+
 public class GameLogic {
     char[][] grid = new char[3][3];
-    String userType;
+    char userMark = 'O';
+    char computerMark = 'X';
+    Random random = new Random();
 
-    void game(){
-        String gameResult = "In Progress";
-        while (gameResult.equals("In Progress")){
+    void computerMove(int column, int row) {
+        System.out.println("Ok, now my move!");
+        System.out.println();
+        while (grid[row][column] == computerMark){
+            if(grid[column][row] == '-') {
+                column = random.nextInt(3);
+                row = random.nextInt(3);
+                grid[row][column] = computerMark;
+            }
+        }
+    }
+
+    void assignCoordinates(int column, int row) {
+        if (column >= 0 && column <= 2 && row >= 0 && row <= 2) {
+            grid[row][column] = userMark;
+            System.out.println();
+        }
+    }
+
+
+/*
             if(userType.equals("A0"))
                 grid[0][0] = 'O';
             else if (userType.equals("B0"))
@@ -25,17 +47,15 @@ public class GameLogic {
             grid[2][2] = 'O';
             else
             System.out.println("Incorrect answer, try again...");
-            gameResult = "xyz";
-        }
-    }
+        }*/
 
-    public void genererateGrid() { // generate and print board
+
+    void genererateGrid() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                grid[i][j] = '+';
+                grid[i][j] = '-';
             }
         }
-
     }
 
     void printGrid() {
@@ -49,9 +69,13 @@ public class GameLogic {
         }
     }
 
-    void printRules () {
+    void printRules() {
         System.out.println("Rules: In this game you need... So, let's play! ");
         System.out.println();
     }
+
 }
+
+
+
 
