@@ -8,7 +8,6 @@ public class GameLogic {
     char currentPlayer = 'O';
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
     void playGame() throws IOException {        // the game method
         printRules();
         genererateGrid();
