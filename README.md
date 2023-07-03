@@ -1,4 +1,4 @@
-### TicTacToe
+# TicTacToe
 
 ## Introduction
 
@@ -6,7 +6,7 @@ The "Tic-Tac-Toe" project is an implementation of the popular tic-tac-toe game i
 where the computer makes random moves. The objective of the game is to place three marks in a row (horizontally, vertically, or diagonally) on a 3x3 grid. 
 There are no  algorithms responsible for the tactical movement of the computer in the code. 
 
-# The code provides the following key features:
+### The code provides the following key features:
 - Displaying the game board
 - Receiving user moves
 - Making computer moves
