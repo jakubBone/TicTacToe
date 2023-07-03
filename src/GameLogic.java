@@ -7,14 +7,14 @@ public class GameLogic {
     boolean isGameOver = false;
     char currentPlayer = 'O';
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    Board board = new Board();
 
 
     void playGame() throws IOException {        // the game method
-        printRules();
-        genererateGrid();
+        board.genererateGrid(grid);
 
         while (!isGameOver) {
-            printGrid();
+            board.printGrid(grid);
             userMove();
             switchPlayer();
             gameStatus(currentPlayer);
@@ -84,13 +84,13 @@ public class GameLogic {
     }
 
     public void whoIsWinner(){                  // check who is the winner
-        printGrid();
+        board.printGrid(grid);
         if(checkResult('O'))
             System.out.println("Congratulations! You Won :)");
         else if(checkResult('X'))
             System.out.println("Oh no... You lost :(");
         else {
-            printGrid();
+            board.printGrid(grid);
             System.out.println("Nobody won. Would you like to play again? ;) :(");
         }
     }
@@ -146,36 +146,8 @@ public class GameLogic {
         currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
     }  // switch user to computer
 
-    void printGrid() {                                      // the current grid printing
-        System.out.println("  A B C");
-        for (int i = 0; i < 3; i++) {
-            System.out.print(i + " ");
-            for (int j = 0; j < 3; j++) {
-                System.out.print(grid[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-    void genererateGrid() {                                 // the grid initial method
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                grid[i][j] = '-';
-            }
-        }
-    }
 
-    void printRules() throws IOException{                                     // printing the game rules
-        System.out.print("Hi buddy! Welcome in Tic-Tac-Toe game. Please type your name: ");
-        String name = reader.readLine();
-        System.out.println("Hello " + name + "! My name is Computer. " + "Let's start the game!");
-        System.out.println();
-        System.out.println("The rules: \nIn this game we will try to place three of our symbols in the line a row on" +
-                " a 3x3 board. The row can be horizontal, vertical,\nor diagonal. The first one to do it wins the " +
-                "game. You as a master will get the O, while I, as the humble computer, will take the X sign. \n" +
-                "If the entire board gets filled up without a winning line, it's a tie. Alright, let's dive into " +
-                "this strategic battle of X and O, dude! \n\nLet's the best win!");
-        System.out.println();
-    }
+
 }
 
 
