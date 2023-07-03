@@ -95,8 +95,6 @@ public class GameLogic {
         }
     }
 
-
-
     public void gameStatus(char player) {           // check if the game is over
         if (isGridFull() || checkResult('O') || checkResult('X')) {
             isGameOver = true;
