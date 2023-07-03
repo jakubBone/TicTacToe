@@ -15,7 +15,7 @@ There are no  algorithms responsible for the tactical movement of the computer i
 
 ## Instructions
 
-# To install the program and use the code, follow these steps:
+### To install the program and use the code, follow these steps:
 - Clone the repository containing the project code to your local machine.
 - Launch a Java development environment, such as IntelliJ IDEA or Eclipse.
 - Import the project into the development environment as a Java project.
