@@ -8,9 +8,11 @@ public class GameLogic {
     char currentPlayer = 'O';
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+
     void playGame() throws IOException {        // the game method
         printRules();
         genererateGrid();
+
         while (!isGameOver) {
             printGrid();
             userMove();
@@ -25,7 +27,7 @@ public class GameLogic {
             whoIsWinner();
     }
 
-    void userMove() throws IOException {           // the user movement
+    void userMove() throws IOException {           // the user move
         System.out.print("Please type a column (A, B, or C): ");
         String columnIndex = reader.readLine();
         System.out.print("Please type a row (0, 1, or 2): ");
@@ -34,28 +36,28 @@ public class GameLogic {
             if (isValidMove(row, column) && grid[row][column] == '-')
                 grid[row][column] = currentPlayer;
             else {
-                System.out.println("Incorrect move buddy... Please, try again");
+                System.out.println("Incorrect move dude... Please, try again");
                 userMove();
             }
         }
 
-    void computerMove() {                           // the computer movement
-        boolean correctMove = false;
+    void computerMove() {                           // the computer move
+        boolean validMove = false;
         System.out.println();
         System.out.println("Ok, now my move!");
-        while (!correctMove) {
+        while (!validMove) {
             int row = (int) (Math.random() * 3);
             int column = (int) (Math.random() * 3);
                 if (isValidMove(row,column) && grid[row][column] == '-') {
                     grid[row][column] = currentPlayer;
                     System.out.println("My choise is: " +getColumnLetter(column) + row);
                     System.out.println();
-                    correctMove = true;
+                    validMove = true;
                 }
             }
         }
-    public char getColumnLetter(int column){        // refactoring computer column
-        switch (column) {                           // from number to letter
+    public char getColumnLetter(int column){
+        switch (column) {
             case 0:
                 return 'A';
             case 1:
@@ -65,6 +67,7 @@ public class GameLogic {
             default:
                 return ' ';
         }
+
     }
     public int getColumnNumber(String column) {     // refactoring input letters to numbers
         column = column.toUpperCase();
@@ -88,7 +91,7 @@ public class GameLogic {
             System.out.println("Oh no... You lost :(");
         else {
             printGrid();
-            System.out.println("Nobody won. Would you like to play again? ;)");
+            System.out.println("Nobody won. Would you like to play again? ;) :(");
         }
     }
 
@@ -100,7 +103,7 @@ public class GameLogic {
         }
     }
 
-    boolean checkResult(char player) {  //
+    boolean checkResult(char player) {  // check the result of game
         for (int i = 0; i < 3; i++) {                   // check the rows
             if (grid[i][0] == player && grid[i][1] == player && grid[i][2] == player) {
                 return true;
@@ -141,9 +144,9 @@ public class GameLogic {
         return false;
     }
 
-    void switchPlayer(){                                    // switch the player after movement
+    void switchPlayer(){                                    // switch the player after move
         currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
-    }
+    }  // switch user to computer
 
     void printGrid() {                                      // the current grid printing
         System.out.println("  A B C");
@@ -172,7 +175,7 @@ public class GameLogic {
                 " a 3x3 board. The row can be horizontal, vertical,\nor diagonal. The first one to do it wins the " +
                 "game. You as a master will get the O, while I, as the humble computer, will take the X sign. \n" +
                 "If the entire board gets filled up without a winning line, it's a tie. Alright, let's dive into " +
-                "this strategic battle of X and O! \n\nLet's the best win!");
+                "this strategic battle of X and O, dude! \n\nLet's the best win!");
         System.out.println();
     }
 }
