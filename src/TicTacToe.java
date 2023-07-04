@@ -16,7 +16,7 @@ public class TicTacToe {
                     " a 3x3 board. The row can be horizontal, vertical,\nor diagonal. The first one to do it wins the " +
                     "game. You as a master will get the O, while I, as the humble computer, will take the X sign. \n" +
                     "If the entire board gets filled up without a winning line, it's a tie. Alright, let's dive into " +
-                    "this strategic battle of X and O, dude! \n\nLet's the best win!");
+                    "this strategic battle of X and O! \n\nLet's the best win!");
             System.out.println();
 
             gameLogic.playGame();

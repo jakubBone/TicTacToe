@@ -7,32 +7,32 @@ public class Player {
     GameLogic gameLogic;
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    void userMove() throws IOException {           // the user move
+    void userMove(char grid [][], char player) throws IOException {           // the user movement
         System.out.print("Please type a column (A, B, or C): ");
         String columnIndex = reader.readLine();
         System.out.print("Please type a row (0, 1, or 2): ");
         int row = Integer.parseInt(reader.readLine());
         int column = getColumnNumber(columnIndex);
-        if (gameLogic.isValidMove(row, column) && gameLogic.grid[row][column] == '-')
-            gameLogic.grid[row][column] = gameLogic.currentPlayer;
+        if (isValidMove(row, column) && grid[row][column] == '-')
+            grid[row][column] = player;
         else {
             System.out.println("Incorrect move dude... Please, try again");
-            userMove();
+            userMove(grid, player);
         }
     }
 
-    void computerMove() {                           // the computer move
-        boolean validMove = false;
+    void computerMove(char grid[][], char player) {                           // the computer movement
+        boolean correctMove = false;
         System.out.println();
         System.out.println("Ok, now my move!");
-        while (!validMove) {
+        while (!correctMove) {
             int row = (int) (Math.random() * 3);
             int column = (int) (Math.random() * 3);
-            if (gameLogic.isValidMove(row,column) && gameLogic.grid[row][column] == '-') {
-                gameLogic.grid[row][column] = gameLogic.currentPlayer;
+            if (isValidMove(row,column) && grid[row][column] == '-') {
+                grid[row][column] = player;
                 System.out.println("My choise is: " +getColumnLetter(column) + row);
                 System.out.println();
-                validMove = true;
+                correctMove = true;
             }
         }
     }
@@ -62,5 +62,11 @@ public class Player {
             default:
                 return -1;
         }
+    }
+
+    public boolean isValidMove(int row, int column){               // check if the movement is correct
+        if(row >=0 && row <3 && column >= 0 && column <3)
+            return true;
+        return false;
     }
 }

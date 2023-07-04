@@ -8,6 +8,7 @@ public class GameLogic {
     char currentPlayer = 'O';
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     Board board = new Board();
+    Player player = new Player();
 
 
     void playGame() throws IOException {        // the game method
@@ -15,72 +16,16 @@ public class GameLogic {
 
         while (!isGameOver) {
             board.printGrid(grid);
-            userMove();
+            player.userMove(grid, currentPlayer);
             switchPlayer();
             gameStatus(currentPlayer);
             if (isGameOver)
                 break;
-            computerMove();
+            player.computerMove(grid, currentPlayer);
             switchPlayer();
             gameStatus(currentPlayer);
         }
             whoIsWinner();
-    }
-
-    void userMove() throws IOException {           // the user move
-        System.out.print("Please type a column (A, B, or C): ");
-        String columnIndex = reader.readLine();
-        System.out.print("Please type a row (0, 1, or 2): ");
-        int row = Integer.parseInt(reader.readLine());
-        int column = getColumnNumber(columnIndex);
-            if (isValidMove(row, column) && grid[row][column] == '-')
-                grid[row][column] = currentPlayer;
-            else {
-                System.out.println("Incorrect move dude... Please, try again");
-                userMove();
-            }
-        }
-
-    void computerMove() {                           // the computer move
-        boolean validMove = false;
-        System.out.println();
-        System.out.println("Ok, now my move!");
-        while (!validMove) {
-            int row = (int) (Math.random() * 3);
-            int column = (int) (Math.random() * 3);
-                if (isValidMove(row,column) && grid[row][column] == '-') {
-                    grid[row][column] = currentPlayer;
-                    System.out.println("My choise is: " +getColumnLetter(column) + row);
-                    System.out.println();
-                    validMove = true;
-                }
-            }
-        }
-    public char getColumnLetter(int column){
-        switch (column) {
-            case 0:
-                return 'A';
-            case 1:
-                return 'B';
-            case 2:
-                return 'C';
-            default:
-                return ' ';
-        }
-
-    }
-    public int getColumnNumber(String column) {     // refactoring input letters to numbers
-        column = column.toUpperCase();
-        switch (column) {
-            case "A":
-                return 0;
-            case "B":
-                return 1;
-            case "C":
-                return 2;
-            default:
-                return -1;
-        }
     }
 
     public void whoIsWinner(){                  // check who is the winner
@@ -101,7 +46,7 @@ public class GameLogic {
         }
     }
 
-    boolean checkResult(char player) {  // check the result of game
+    boolean checkResult(char player) {
         for (int i = 0; i < 3; i++) {                   // check the rows
             if (grid[i][0] == player && grid[i][1] == player && grid[i][2] == player) {
                 return true;
@@ -123,10 +68,7 @@ public class GameLogic {
         return  false;
     }
 
-
-
-
-    public boolean isGridFull(){                            // check if the grid is full of signs
+    public boolean isGridFull(){                            // check if the grid is full
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(grid[i][j] == '-')
@@ -136,17 +78,9 @@ public class GameLogic {
         return true;
     }
 
-    public boolean isValidMove(int row, int column){               // check if the movement is correct
-        if(row >=0 && row <3 && column >= 0 && column <3)
-            return true;
-        return false;
-    }
-
     void switchPlayer(){                                    // switch the player after move
         currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
-    }  // switch user to computer
-
-
+    }  // switch player after movement
 
 }
 
